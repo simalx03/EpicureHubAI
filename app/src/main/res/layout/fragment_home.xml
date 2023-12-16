@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- First Section with Welcome Message -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:background="@drawable/startbg"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:outlineAmbientShadowColor="@color/black"
+        android:padding="16dp"
+        android:visibility="visible">
+
+
+        <TextView
+            android:id="@+id/textHome"
+            android:layout_width="325dp"
+            android:layout_height="121dp"
+            android:fontFamily="@font/alfa_slab_one"
+            android:gravity="center"
+            android:text="Welcome to our Food Recipe Website"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="#FDFDFD"
+            android:textFontWeight="@android:integer/config_longAnimTime"
+            android:textIsSelectable="false"
+            android:textSize="28sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="355dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/berkshire_swash"
+            android:gravity="center"
+            android:text="Share and Discover Delicious Recipes from Around the World!  Discover delicious recipes to satisfy your taste buds"
+            android:textColor="#FFE516"
+            android:textDirection="firstStrongLtr"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/explore"
+            android:layout_width="148dp"
+            android:layout_height="61dp"
+            android:layout_marginTop="50px"
+            android:onClick="toExplorePage"
+            android:text="Explore"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textSize="20sp" />
+
+        <!-- Add any other UI elements for the first section -->
+
+    </LinearLayout>
+
+    <!-- Second Section with Share Content -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/section2"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="325dp"
+            android:layout_height="121dp"
+            android:fontFamily="@font/alfa_slab_one"
+            android:gravity="center"
+            android:text="Share and Explore Delicious Recipes"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="#FDFDFD"
+            android:textFontWeight="@android:integer/config_longAnimTime"
+            android:textIsSelectable="false"
+            android:textSize="28sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="355dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/berkshire_swash"
+            android:gravity="center"
+            android:text="Join our community of food enthusiasts and share your favorite recipes with the world. Whether it's a family secret or a unique creation, we'd love to see what you have in store!"
+            android:textColor="#D9FFF7"
+            android:textDirection="firstStrongLtr"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50px"
+            android:background="#C7ABFA"
+            android:backgroundTint="#F8F8F8"
+            android:fadeScrollbars="false"
+            android:onClick="toSharePage"
+            android:rotationX="4"
+            android:text="Share"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <!-- Add any other sections as needed -->
+
+</LinearLayout>
