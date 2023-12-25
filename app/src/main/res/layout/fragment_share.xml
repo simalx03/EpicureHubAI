@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         tools:ignore="UselessParent">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -30,13 +30,47 @@
                 android:id="@+id/editTextRecipeDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Recipe Description"/>
+                android:hint="Recipe Description" />
+
+            <EditText
+                android:id="@+id/ingridientText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="Ingridients"
+                android:inputType="textMultiLine" />
+
+            <EditText
+                android:id="@+id/instructionText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="Instruction"
+                android:inputType="textMultiLine" />
+
+            <EditText
+                android:id="@+id/serveText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Serve Size"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/cooktimeText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Cooking Time  in (min.)"
+                android:inputType="text" />
 
             <Button
                 android:id="@+id/btnSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Submit"/>
+                android:text="Submit" />
 
         </LinearLayout>
 

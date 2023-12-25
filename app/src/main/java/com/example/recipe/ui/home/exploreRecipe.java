@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,14 +54,19 @@ public class exploreRecipe extends Fragment {
 
         private void readDataFromFirebase() {
             // Attach a listener to read the data at our recipes reference
-            databaseReference.addValueEventListener(new ValueEventListener() {
+            DatabaseReference allRecipesRef = databaseReference;
+
+            // Attach a listener to read the data at the recipes reference
+            allRecipesRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     recipeList.clear();
-                    for (DataSnapshot recipeSnapshot : dataSnapshot.getChildren()) {
-                        Recipe recipe = recipeSnapshot.getValue(Recipe.class);
-                        if (recipe != null) {
-                            recipeList.add(recipe);
+                    for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                        for (DataSnapshot recipeSnapshot : userSnapshot.getChildren()) {
+                            Recipe recipe = recipeSnapshot.getValue(Recipe.class);
+                            if (recipe != null) {
+                                recipeList.add(recipe);
+                            }
                         }
                     }
                     recipeAdapter.notifyDataSetChanged();
@@ -68,7 +75,7 @@ public class exploreRecipe extends Fragment {
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     // Failed to read value
-                    Toast.makeText(getContext(), "Failed to read data from Firebase", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Failed to read recipes from Firebase", Toast.LENGTH_SHORT).show();
                 }
             });
         }

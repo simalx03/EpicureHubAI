@@ -39,14 +39,17 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView recipeNameTextView;
+        private TextView discriptionTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             recipeNameTextView = itemView.findViewById(R.id.recipeNameTextView);
+            discriptionTextView = itemView.findViewById(R.id.discriptionTextView);
         }
 
         public void bind(Recipe recipe) {
             recipeNameTextView.setText(recipe.getRecipeName());
+            discriptionTextView.setText(recipe.getRecipeDescription ());
             // You can bind other data to UI elements here
         }
     }

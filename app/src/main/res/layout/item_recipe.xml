@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="30px"
+    android:background="#AD86F1"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -11,7 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/discriptionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <!-- Add more TextViews or other UI elements as needed to display additional recipe information -->
 
