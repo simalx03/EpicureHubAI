@@ -113,4 +113,6 @@
     <string name="title_notifications">Notifications</string>
     <string name="myRecipe">My Recipe</string>
     <string name="email">Email</string>
+    <string name="recipe_name">Recipe Name</string>
+    <string name="recipe_description">Recipe Description</string>
 </resources>

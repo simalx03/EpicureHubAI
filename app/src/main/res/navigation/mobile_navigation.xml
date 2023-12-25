@@ -9,11 +9,7 @@
         android:id="@+id/nav_home"
         android:name="com.example.recipe.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_nav_home_to_exploreRecipe2"
-            app:destination="@id/exploreRecipe2" />
-    </fragment>
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/myRecipeFragment4"
@@ -24,18 +20,19 @@
         android:id="@+id/exploreRecipe2"
         android:name="com.example.recipe.ui.home.exploreRecipe"
         android:label="fragment_explore_recipe"
-        tools:layout="@layout/fragment_explore_recipe" >
-        <action
-            android:id="@+id/action_exploreRecipe2_to_shareFragment"
-            app:destination="@id/shareFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_explore_recipe" />
     <fragment
         android:id="@+id/shareFragment"
         android:name="com.example.recipe.ui.home.shareFragment"
         android:label="fragment_share"
-        tools:layout="@layout/fragment_share" >
-        <action
-            android:id="@+id/action_shareFragment_to_myRecipeFragment4"
-            app:destination="@id/myRecipeFragment4" />
-    </fragment>
+        tools:layout="@layout/fragment_share" />
+    <fragment
+        android:id="@+id/recipeDetailFragment"
+        android:name="com.example.recipe.ui.home.RecipeDetailFragment"
+        android:label="RecipeDetailFragment" />
+    <action
+        android:id="@+id/action_exploreFragment_to_recipeDetailFragment"
+        app:destination="@id/recipeDetailFragment" />
+
+
 </navigation>

@@ -37,20 +37,45 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         return recipeList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView recipeNameTextView;
-        private TextView discriptionTextView;
+        private TextView descriptionTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             recipeNameTextView = itemView.findViewById(R.id.recipeNameTextView);
-            discriptionTextView = itemView.findViewById(R.id.discriptionTextView);
+            descriptionTextView = itemView.findViewById(R.id.descriptionTextView);
+
+            // Set the click listener for the item view
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && onItemClickListener != null) {
+                        onItemClickListener.onItemClick(position);
+                    }
+                }
+            });
         }
 
         public void bind(Recipe recipe) {
             recipeNameTextView.setText(recipe.getRecipeName());
-            discriptionTextView.setText(recipe.getRecipeDescription ());
+            descriptionTextView.setText(recipe.getRecipeDescription ());
             // You can bind other data to UI elements here
         }
+    }
+
+    // Recipe details section
+    // Define an interface for item click events
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    // Member variable for the listener
+    private OnItemClickListener onItemClickListener;
+
+    // Setter method for the listener
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
     }
 }

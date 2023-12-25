@@ -6,8 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,6 +53,18 @@ public class exploreRecipe extends Fragment {
             // Read data from Firebase
             readDataFromFirebase();
 
+            // In ExploreRecipeFragment, set up click listener for RecyclerView items
+            recipeAdapter.setOnItemClickListener(new RecipeAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    // Get the selected recipe
+                    Recipe selectedRecipe = recipeList.get(position);
+
+                    // Open RecipeDetailFragment and pass the recipe details
+                    openRecipeDetailFragment(selectedRecipe);
+                }
+            });
+
             return view;
         }
 
@@ -79,5 +95,26 @@ public class exploreRecipe extends Fragment {
                 }
             });
         }
+
+
+    // Function to open RecipeDetailFragment and pass the recipe details
+    // Inside your onItemClick method in exploreRecipe.java
+    private void openRecipeDetailFragment(Recipe recipe) {
+        // Get the NavController
+        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
+
+        // Navigate to RecipeDetailFragment and pass the recipe details as arguments
+        navController.navigate(R.id.action_exploreFragment_to_recipeDetailFragment, getBundle(recipe));
     }
+
+    private Bundle getBundle(Recipe recipe) {
+        Bundle args = new Bundle();
+        args.putString("recipeName", recipe.getRecipeName());
+        args.putString("recipeDescription", recipe.getRecipeDescription());
+        // Add other details as needed
+        return args;
+    }
+
+
+}
 
