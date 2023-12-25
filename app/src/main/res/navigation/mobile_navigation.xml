@@ -9,23 +9,50 @@
         android:id="@+id/nav_home"
         android:name="com.example.recipe.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_exploreRecipe2"
+            app:destination="@id/exploreRecipe2" />
+        <action
+            android:id="@+id/action_nav_home_to_shareFragment"
+            app:destination="@id/shareFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_myRecipeFragment4"
+            app:destination="@id/myRecipeFragment4" />
+    </fragment>
 
     <fragment
         android:id="@+id/myRecipeFragment4"
         android:name="com.example.recipe.ui.home.myRecipeFragment"
-        android:label="fragment_my_recipe"
+        android:label="My Recipe"
         tools:layout="@layout/fragment_my_recipe" />
     <fragment
         android:id="@+id/exploreRecipe2"
         android:name="com.example.recipe.ui.home.exploreRecipe"
-        android:label="fragment_explore_recipe"
-        tools:layout="@layout/fragment_explore_recipe" />
+        android:label="Explore  Recipe"
+        tools:layout="@layout/fragment_explore_recipe" >
+        <action
+            android:id="@+id/action_exploreRecipe2_to_shareFragment"
+            app:destination="@id/shareFragment" />
+        <action
+            android:id="@+id/action_exploreRecipe2_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
     <fragment
         android:id="@+id/shareFragment"
         android:name="com.example.recipe.ui.home.shareFragment"
-        android:label="fragment_share"
-        tools:layout="@layout/fragment_share" />
+        android:label="Upload Recipe"
+        tools:layout="@layout/fragment_share" >
+        <action
+            android:id="@+id/action_shareFragment_to_myRecipeFragment4"
+            app:destination="@id/myRecipeFragment4" />
+        <action
+            android:id="@+id/action_shareFragment_to_exploreRecipe2"
+            app:destination="@id/exploreRecipe2" />
+        <action
+            android:id="@+id/action_shareFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
     <fragment
         android:id="@+id/recipeDetailFragment"
         android:name="com.example.recipe.ui.home.RecipeDetailFragment"

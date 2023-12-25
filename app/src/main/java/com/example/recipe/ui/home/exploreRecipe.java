@@ -111,6 +111,10 @@ public class exploreRecipe extends Fragment {
         Bundle args = new Bundle();
         args.putString("recipeName", recipe.getRecipeName());
         args.putString("recipeDescription", recipe.getRecipeDescription());
+        args.putString("recipeIngredient", recipe.getIngredients ());
+        args.putString("recipeInstruction", recipe.getInstructions());
+        args.putString("recipeServeSize", recipe.getServeSize ());
+        args.putString("recipeCookingTime", recipe.getCookingTime ());
         // Add other details as needed
         return args;
     }

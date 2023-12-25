@@ -38,6 +38,7 @@ public class shareFragment extends Fragment {
 
     private DatabaseReference databaseReference;
     private EditText editTextRecipeName, editTextRecipeDescription, ingridientsText, instructionText, serveSizeText, cookingTimeText;
+    private Spinner spinnerCategory;
     private Button btnSubmit;
 
     @Override
@@ -56,6 +57,7 @@ public class shareFragment extends Fragment {
         instructionText = view.findViewById (R.id.instructionText);
         serveSizeText = view.findViewById(R.id.serveText);
         cookingTimeText = view.findViewById(R.id.cooktimeText);
+        spinnerCategory = view.findViewById(R.id.spinnerCategory);
         btnSubmit = view.findViewById(R.id.btnSubmit);
 
 
@@ -69,14 +71,15 @@ public class shareFragment extends Fragment {
                 String ingridients = ingridientsText.getText().toString().trim();
                 String instruction = instructionText.getText().toString().trim();
                 String serveSize = serveSizeText.getText().toString().trim();
+                String category = spinnerCategory.getSelectedItem().toString();
                 String cookingTime = cookingTimeText.getText().toString().trim();
 
                 // Check if both fields are not empty before submitting to Firebase
                 if (!recipeName.isEmpty() && !recipeDescription.isEmpty() && !ingridients.isEmpty() && !instruction.isEmpty() && !serveSize.isEmpty() && !cookingTime.isEmpty()) {
-                    sendRecipeToFirebase(recipeName, recipeDescription, ingridients, instruction, serveSize, cookingTime);
+                    sendRecipeToFirebase(recipeName, recipeDescription, ingridients, instruction, serveSize, cookingTime, category);
                     Toast.makeText(getContext(), "Recipe submitted successfully", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getContext(), "Please enter both recipe name and description", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Please fill all the required feilds", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -84,7 +87,7 @@ public class shareFragment extends Fragment {
         return view;
     }
 
-    private void sendRecipeToFirebase(String recipeName, String recipeDescription,String ingridients, String instruction, String serveSize, String cookingTime) {
+    private void sendRecipeToFirebase(String recipeName, String recipeDescription,String ingridients, String instruction, String serveSize, String cookingTime,String category) {
         // Create a unique key for the recipe
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -96,7 +99,7 @@ public class shareFragment extends Fragment {
             String recipeKey = databaseReference.push().getKey();
 
             // Create a Recipe object with the provided information
-            Recipe recipe = new Recipe(recipeName, recipeDescription, ingridients, instruction, serveSize, cookingTime);
+            Recipe recipe = new Recipe(recipeName, recipeDescription, ingridients, instruction, serveSize, cookingTime, category);
 
             // Use the unique key to set the recipe data in the database under the user's ID
             databaseReference.child(userId).child(recipeKey).setValue(recipe)

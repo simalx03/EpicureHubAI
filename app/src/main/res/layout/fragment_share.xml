@@ -30,7 +30,8 @@
                 android:id="@+id/editTextRecipeDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Recipe Description" />
+                android:hint="@string/description"
+                android:autofillHints="tell something about recipe" />
 
             <EditText
                 android:id="@+id/ingridientText"
@@ -65,6 +66,15 @@
                 android:ems="10"
                 android:hint="Cooking Time  in (min.)"
                 android:inputType="text" />
+
+            <Spinner
+                android:id="@+id/spinnerCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:entries="@array/categories"
+                android:prompt="@string/select_category" /> <!-- Correct reference to string resource -->
+
 
             <Button
                 android:id="@+id/btnSubmit"
