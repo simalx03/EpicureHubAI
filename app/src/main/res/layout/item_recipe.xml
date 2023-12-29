@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="normal" />
 
     <!-- Add more TextViews or other UI elements as needed to display additional recipe information -->
 

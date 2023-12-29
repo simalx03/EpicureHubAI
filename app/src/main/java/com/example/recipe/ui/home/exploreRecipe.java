@@ -9,6 +9,8 @@ import android.widget.Toast;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import androidx.appcompat.widget.SearchView;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -33,6 +35,8 @@ public class exploreRecipe extends Fragment {
         private RecyclerView recyclerView;
         private RecipeAdapter recipeAdapter; // Assuming you have a custom adapter
         private List<Recipe> recipeList = new ArrayList<>();
+        private SearchView searchView;
+
 
         private DatabaseReference databaseReference;
 
@@ -45,6 +49,7 @@ public class exploreRecipe extends Fragment {
             databaseReference = firebaseDatabase.getReference("recipes");
 
             // Initialize UI elements
+            searchView = view.findViewById(R.id.searchView);
             recyclerView = view.findViewById(R.id.recyclerView);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             recipeAdapter = new RecipeAdapter(recipeList);
@@ -52,6 +57,9 @@ public class exploreRecipe extends Fragment {
 
             // Read data from Firebase
             readDataFromFirebase();
+
+            // Set up search functionality
+            setupSearch();
 
             // In ExploreRecipeFragment, set up click listener for RecyclerView items
             recipeAdapter.setOnItemClickListener(new RecipeAdapter.OnItemClickListener() {
@@ -66,6 +74,24 @@ public class exploreRecipe extends Fragment {
             });
 
             return view;
+        }
+
+        private void setupSearch() {
+            // Set a query listener for the search view
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    // Handle search query submission if needed
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    // Filter the list based on the search query
+                    recipeAdapter.getFilter().filter(newText);
+                    return true;
+                }
+            });
         }
 
         private void readDataFromFirebase() {
