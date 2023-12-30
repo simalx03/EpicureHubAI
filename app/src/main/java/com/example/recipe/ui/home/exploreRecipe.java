@@ -4,6 +4,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.navigation.NavController;
@@ -26,6 +30,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import com.example.recipe.R;
+import com.example.recipe.ui.home.RecipeAdapter;
+import com.example.recipe.ui.home.Recipe;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +43,10 @@ public class exploreRecipe extends Fragment {
         private RecipeAdapter recipeAdapter; // Assuming you have a custom adapter
         private List<Recipe> recipeList = new ArrayList<>();
         private SearchView searchView;
+        private ProgressBar progressBar;
 
+        private Spinner categorySpinner;
+        private ArrayAdapter<String> categoryAdapter;
 
         private DatabaseReference databaseReference;
 
@@ -49,11 +59,35 @@ public class exploreRecipe extends Fragment {
             databaseReference = firebaseDatabase.getReference("recipes");
 
             // Initialize UI elements
+            progressBar = view.findViewById(R.id.progressBar);
             searchView = view.findViewById(R.id.searchView);
             recyclerView = view.findViewById(R.id.recyclerView);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             recipeAdapter = new RecipeAdapter(recipeList);
             recyclerView.setAdapter(recipeAdapter);
+
+            progressBar.setVisibility(View.VISIBLE);
+
+            // Initialize category Spinner
+            categorySpinner = view.findViewById(R.id.categorySpinner);
+            categoryAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_dropdown_item, getCategoryList());
+            categorySpinner.setAdapter(categoryAdapter);
+
+            categorySpinner.setSelection(categoryAdapter.getPosition("All"));
+
+            // Set up category filter listener
+            categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                    // Read data from Firebase based on the selected category
+                    readDataFromFirebase();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parentView) {
+                    // Do nothing here
+                }
+            });
 
             // Read data from Firebase
             readDataFromFirebase();
@@ -76,6 +110,17 @@ public class exploreRecipe extends Fragment {
             return view;
         }
 
+        private List<String> getCategoryList() {
+            // Return a list of categories, including the "All" option
+            List<String> categories = new ArrayList<>();
+            categories.add("All");
+            categories.add("Breakfast");
+            categories.add("Lunch");
+            categories.add("Dinner");
+            categories.add("Dessert");
+            return categories;
+        }
+
         private void setupSearch() {
             // Set a query listener for the search view
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -95,6 +140,8 @@ public class exploreRecipe extends Fragment {
         }
 
         private void readDataFromFirebase() {
+            String selectedCategory = categorySpinner.getSelectedItem().toString();
+
             // Attach a listener to read the data at our recipes reference
             DatabaseReference allRecipesRef = databaseReference;
 
@@ -106,18 +153,22 @@ public class exploreRecipe extends Fragment {
                     for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                         for (DataSnapshot recipeSnapshot : userSnapshot.getChildren()) {
                             Recipe recipe = recipeSnapshot.getValue(Recipe.class);
-                            if (recipe != null) {
+                            if ("All".equals(selectedCategory) || (recipe != null && selectedCategory.equals(recipe.getCategory()))) {
                                 recipeList.add(recipe);
                             }
                         }
                     }
                     recipeAdapter.notifyDataSetChanged();
+                    // Hide ProgressBar after loading
+                    progressBar.setVisibility(View.GONE);
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     // Failed to read value
                     Toast.makeText(getContext(), "Failed to read recipes from Firebase", Toast.LENGTH_SHORT).show();
+                    // Hide ProgressBar after loading
+                    progressBar.setVisibility(View.GONE);
                 }
             });
         }

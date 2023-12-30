@@ -23,20 +23,23 @@
             <EditText
                 android:id="@+id/editTextRecipeName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="55dp"
+                android:layout_marginTop="20px"
                 android:hint="Recipe Name" />
 
             <EditText
                 android:id="@+id/editTextRecipeDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/description"
-                android:autofillHints="tell something about recipe" />
+                android:layout_marginTop="20px"
+                android:autofillHints="tell something about recipe"
+                android:hint="@string/description" />
 
             <EditText
                 android:id="@+id/ingridientText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
                 android:ems="10"
                 android:gravity="start|top"
                 android:hint="Ingridients"
@@ -46,6 +49,7 @@
                 android:id="@+id/instructionText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
                 android:ems="10"
                 android:gravity="start|top"
                 android:hint="Instruction"
@@ -55,6 +59,7 @@
                 android:id="@+id/serveText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
                 android:ems="10"
                 android:hint="Serve Size"
                 android:inputType="text" />
@@ -63,6 +68,7 @@
                 android:id="@+id/cooktimeText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
                 android:ems="10"
                 android:hint="Cooking Time  in (min.)"
                 android:inputType="text" />
@@ -80,7 +86,8 @@
                 android:id="@+id/btnSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Submit" />
+                android:text="Submit"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
