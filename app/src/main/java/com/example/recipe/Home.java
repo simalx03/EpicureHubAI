@@ -6,6 +6,9 @@ import android.view.Menu;
 import android.widget.TextView;
 import android.content.Intent;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+
 import com.example.recipe.ui.home.HomeFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser; // Add this line
@@ -42,7 +45,7 @@ public class Home extends AppCompatActivity {
         binding.appBarHome.fab.setOnClickListener (new View.OnClickListener ( ) {
             @Override
             public void onClick(View view) {
-                Snackbar.make (view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make (view, "\"Welcome to RecipeHub! \uD83C\uDF1F Share your favorite recipes with the community and discover a world of delightful flavors. Let's cook, share, and savor together!\" ", Snackbar.LENGTH_LONG)
                         .setAction ("Action", null).show ( );
             }
         });
@@ -73,13 +76,32 @@ public class Home extends AppCompatActivity {
     }
 
     public void logout(View view) {
-        // For example, sign out from Firebase
-        mAuth.signOut();
-        // Redirect to the login screen or perform any other necessary actions
-        Intent intent = new Intent(Home.this, Login.class);
-        startActivity(intent);
-        finish();
+        // Build the confirmation dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Logout");
+        builder.setMessage("Are you sure you want to logout?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // User confirmed, log out
+                mAuth.signOut();
+                Intent intent = new Intent(Home.this, Login.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // User canceled, do nothing
+                dialog.dismiss();
+            }
+        });
+
+        // Show the dialog
+        builder.show();
     }
+
 
     public void toExplorePage(View view) {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -105,4 +127,6 @@ public class Home extends AppCompatActivity {
         return NavigationUI.navigateUp (navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp ( );
     }
+
+
 }

@@ -8,12 +8,13 @@ public class Recipe {
     private String serveSize;
     private String cookingTime;
     private String category;
+    private String imageUrl;
 
     // Required empty constructor for Firebase
     public Recipe() {
     }
 
-    public Recipe(String recipeName, String recipeDescription, String ingredients, String instructions, String serveSize, String cookingTime, String category) {
+    public Recipe(String recipeName, String recipeDescription, String ingredients, String instructions, String serveSize, String cookingTime, String category,String imageUrl) {
         this.recipeName = recipeName;
         this.recipeDescription = recipeDescription;
         this.ingredients = ingredients;
@@ -21,6 +22,7 @@ public class Recipe {
         this.serveSize = serveSize;
         this.cookingTime = cookingTime;
         this.category = category;
+        this.imageUrl= imageUrl;
     }
 
     public String getRecipeName() {
@@ -53,5 +55,13 @@ public class Recipe {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

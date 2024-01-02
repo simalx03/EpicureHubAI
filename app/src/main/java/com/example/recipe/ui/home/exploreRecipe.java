@@ -192,6 +192,7 @@ public class exploreRecipe extends Fragment {
         args.putString("recipeInstruction", recipe.getInstructions());
         args.putString("recipeServeSize", recipe.getServeSize ());
         args.putString("recipeCookingTime", recipe.getCookingTime ());
+        args.putString("imageUrl", recipe.getImageUrl());
         // Add other details as needed
         return args;
     }

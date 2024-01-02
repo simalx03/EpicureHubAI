@@ -1,5 +1,12 @@
 package com.example.recipe.ui.home;
 
+import android.widget.ImageView;
+import com.bumptech.glide.Glide;
+import android.os.Bundle;
+import androidx.fragment.app.FragmentManager;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,11 +92,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView recipeNameTextView;
         private TextView descriptionTextView;
+        private ImageView recipeImageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             recipeNameTextView = itemView.findViewById(R.id.recipeNameTextView);
             descriptionTextView = itemView.findViewById(R.id.descriptionTextView);
+            recipeImageView = itemView.findViewById(R.id.recipeImageView);
 
             // Set the click listener for the item view
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +107,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION && onItemClickListener != null) {
                         onItemClickListener.onItemClick(position);
+                        // Assuming you have access to the current recipe
+                        Recipe clickedRecipe = recipeList.get(position);
+
                     }
                 }
             });
@@ -106,6 +118,16 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         public void bind(Recipe recipe) {
             recipeNameTextView.setText(recipe.getRecipeName());
             descriptionTextView.setText(recipe.getRecipeDescription ());
+            // Load the image using Picasso or Glide
+            if (recipe.getImageUrl() != null && !TextUtils.isEmpty(recipe.getImageUrl())) {
+                int width = 500;  // Adjust the value according to your needs
+                int height = 500;
+                Glide.with(itemView.getContext()).load(recipe.getImageUrl()).override(width, height).into(recipeImageView);
+
+            } else {
+                // If no image is available, you can set a placeholder or hide the ImageView
+                recipeImageView.setVisibility(View.GONE);
+            }
             // You can bind other data to UI elements here
         }
     }
