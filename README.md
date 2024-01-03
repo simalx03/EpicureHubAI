@@ -1,6 +1,7 @@
 # Recipe Hub
 
-![Recipe Hub Logo](https://github.com/hack-09/Recipe-Hub/blob/main/app/src/main/res/drawable/recipelogo.png)
+![Recipe Hub Logo](https://github.com/hack-09/Recipe-Hub/assets/121863049/8c3b867c-9f25-4c05-bc43-5693806bb19a)
+
 
 Welcome to Recipe Hub, where food enthusiasts come together to share and explore delicious recipes. Whether you're a seasoned chef or a home cook, this app is your go-to platform for discovering and sharing your favorite culinary creations.
 
@@ -40,9 +41,12 @@ Welcome to Recipe Hub, where food enthusiasts come together to share and explore
 
 ## Screenshots
 
-![Screenshot 1](/screenshots/screenshot1.png)
-![Screenshot 2](/screenshots/screenshot2.png)
-![Screenshot 3](/screenshots/screenshot3.png)
+![WhatsApp Image 2024-01-03 at 12 19 44_c0bde3fa](https://github.com/hack-09/Recipe-Hub/assets/121863049/ce43f2dc-e801-4ef7-a223-0d08a6fcdf4c)
+![WhatsApp Image 2024-01-03 at 12 19 43_9eb95813](https://github.com/hack-09/Recipe-Hub/assets/121863049/f5536e20-aad3-42ff-af0f-6fef1a9d691b)
+![WhatsApp Image 2024-01-03 at 12 19 43_16e6a74b](https://github.com/hack-09/Recipe-Hub/assets/121863049/cd04ed99-ba44-4821-bd7d-321c2274ed8b)
+![WhatsApp Image 2024-01-03 at 12 19 43_1c31d2a3](https://github.com/hack-09/Recipe-Hub/assets/121863049/966f5dbf-a5e4-435f-94c2-bd90dbd54ff7)
+![WhatsApp Image 2024-01-03 at 12 19 42_e6d3d490](https://github.com/hack-09/Recipe-Hub/assets/121863049/da435f99-5086-4b90-9fa3-7d3492dda2ad)
+![WhatsApp Image 2024-01-03 at 12 19 42_5c9738de](https://github.com/hack-09/Recipe-Hub/assets/121863049/a4fd2e06-02aa-40fa-addc-eaec75f0776c)
 
 ## Installation
 
