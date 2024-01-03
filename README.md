@@ -1,7 +1,6 @@
 # Recipe Hub
 
 ![Recipe Hub Logo](https://github.com/hack-09/Recipe-Hub/blob/main/app/src/main/res/drawable/recipelogo.png)
-![WhatsApp Image 2023-12-15 at 18 17 08_47748b1a](https://github.com/hack-09/Recipe-Hub/assets/121863049/4765ad3a-f5de-4a92-8ae3-19dbb6bc83ad)
 
 Welcome to Recipe Hub, where food enthusiasts come together to share and explore delicious recipes. Whether you're a seasoned chef or a home cook, this app is your go-to platform for discovering and sharing your favorite culinary creations.
 
