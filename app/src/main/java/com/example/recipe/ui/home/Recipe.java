@@ -1,6 +1,7 @@
 package com.example.recipe.ui.home;
 
 public class Recipe {
+    private String recipeId;
     private String recipeName;
     private String recipeDescription;
     private String ingredients;
@@ -14,7 +15,7 @@ public class Recipe {
     public Recipe() {
     }
 
-    public Recipe(String recipeName, String recipeDescription, String ingredients, String instructions, String serveSize, String cookingTime, String category,String imageUrl) {
+    public Recipe(String recipeId, String recipeName, String recipeDescription, String ingredients, String instructions, String serveSize, String cookingTime, String category,String imageUrl) {
         this.recipeName = recipeName;
         this.recipeDescription = recipeDescription;
         this.ingredients = ingredients;
@@ -23,7 +24,13 @@ public class Recipe {
         this.cookingTime = cookingTime;
         this.category = category;
         this.imageUrl= imageUrl;
+        this.recipeId= recipeId;
     }
+
+    public String getRecipeId() {
+        return recipeId;
+    }
+
 
     public String getRecipeName() {
         return recipeName;

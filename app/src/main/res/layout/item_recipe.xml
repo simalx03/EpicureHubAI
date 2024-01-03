@@ -32,8 +32,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="normal" />
+        android:textSize="14sp"
+        android:textStyle="normal"
+        android:maxLines="5"
+        android:ellipsize="end"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"/>
 
     <!-- Add more TextViews or other UI elements as needed to display additional recipe information -->
 

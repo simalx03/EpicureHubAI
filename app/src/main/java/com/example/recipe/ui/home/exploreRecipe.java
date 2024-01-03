@@ -166,10 +166,13 @@ public class exploreRecipe extends Fragment {
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     // Failed to read value
-                    Toast.makeText(getContext(), "Failed to read recipes from Firebase", Toast.LENGTH_SHORT).show();
+                    if (getContext() != null) {
+                        Toast.makeText(getContext(), "Failed to read recipes from Firebase", Toast.LENGTH_SHORT).show();
+                    }
                     // Hide ProgressBar after loading
                     progressBar.setVisibility(View.GONE);
                 }
+
             });
         }
 

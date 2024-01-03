@@ -1,5 +1,7 @@
 package com.example.recipe.ui.home;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -27,6 +30,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.google.firebase.database.ValueEventListener;
 
 import com.example.recipe.R;
@@ -54,6 +59,8 @@ public class myRecipeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_recipe, container, false);
+
+        Toast.makeText(getContext(), "Click an item to view details, and long-press to delete.", Toast.LENGTH_SHORT).show();
 
         // Initialize Firebase
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -120,8 +127,89 @@ public class myRecipeFragment extends Fragment {
             }
         });
 
+        recipeAdapter.setOnItemLongClickListener(new RecipeAdapter.OnItemLongClickListener() {
+            @Override
+            public void onItemLongClick(int position) {
+                showDeleteConfirmationDialog(position);
+            }
+        });
+
         return view;
     }
+
+    private void showDeleteConfirmationDialog(int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Confirm Delete");
+        builder.setMessage("Are you sure you want to delete this recipe?");
+        builder.setPositiveButton("Delete", (dialog, which) -> {
+            // Handle recipe deletion
+            deleteRecipe(position);
+        });
+
+        builder.setNegativeButton("Cancel", (dialog, which) -> {
+            // Dismiss the dialog
+            dialog.dismiss();
+        });
+
+        builder.create().show();
+    }
+
+    private void deleteRecipe(int position) {
+        Recipe recipeToDelete = recipeList.get(position);
+
+        if (recipeToDelete != null) {
+            // Step 1: Retrieve the image URL
+            String imageUrlToDelete = recipeToDelete.getImageUrl();
+
+            // Step 2: Use Firebase Storage API to delete the image
+            if (imageUrlToDelete != null) {
+                // Create a FirebaseStorage instance
+                FirebaseStorage storage = FirebaseStorage.getInstance();
+
+                // Create a storage reference
+                StorageReference storageReference = storage.getReferenceFromUrl(imageUrlToDelete);
+
+                // Delete the image from Firebase Storage
+                storageReference.delete()
+                        .addOnSuccessListener(aVoid -> {
+                            // Step 3: Once the image is deleted from Storage, proceed to delete data from Realtime Database
+                            deleteDataFromDatabase(position, recipeToDelete);
+                        })
+                        .addOnFailureListener(e -> {
+                            // Handle failure to delete the image
+                            Toast.makeText(getContext(), "Failed to delete image from storage", Toast.LENGTH_SHORT).show();
+                        });
+            } else {
+                Toast.makeText(getContext(), "Image Url is null", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
+    private void deleteDataFromDatabase(int position, Recipe recipeToDelete) {
+        if (userReference != null) {
+            String recipeIdToDelete = recipeToDelete.getRecipeId();
+            if (recipeIdToDelete != null) {
+                // Remove data from Firebase Realtime Database
+                userReference.child(recipeIdToDelete).removeValue()
+                        .addOnSuccessListener(aVoid -> {
+                            // Successfully deleted from Firebase
+                            Toast.makeText(getContext(), "Recipe deleted", Toast.LENGTH_SHORT).show();
+
+                            // Notify the adapter about the removal
+                            recipeList.remove(position);
+                            recipeAdapter.notifyItemRemoved(position);
+                        })
+                        .addOnFailureListener(e -> {
+                            // Failed to delete from Firebase
+                            Toast.makeText(getContext(), "Failed to delete recipe", Toast.LENGTH_SHORT).show();
+                        });
+            } else {
+                Toast.makeText(getContext(), "Recipe ID is null", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 
     private List<String> getCategoryList() {
         // Return a list of categories, including the "All" option
@@ -177,10 +265,13 @@ public class myRecipeFragment extends Fragment {
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     // Failed to read value
-                    Toast.makeText(getContext(), "Failed to read recipes from Firebase", Toast.LENGTH_SHORT).show();
+                    if (getContext() != null) {
+                        Toast.makeText(getContext(), "Failed to read recipes from Firebase", Toast.LENGTH_SHORT).show();
+                    }
                     // Hide ProgressBar after loading
                     progressBar.setVisibility(View.GONE);
                 }
+
             });
         }
     }

@@ -165,7 +165,7 @@ public class shareFragment extends Fragment {
     private void saveRecipeDetails(String recipeKey, String recipeName, String recipeDescription, String ingridients, String instruction, String serveSize, String cookingTime, String category, Uri downloadUri) {
         // Save the remaining recipe details in the Realtime Database
         String imageUrl = downloadUri.toString();
-        Recipe recipe = new Recipe(recipeName, recipeDescription, ingridients, instruction, serveSize, cookingTime, category, imageUrl);
+        Recipe recipe = new Recipe(recipeKey, recipeName, recipeDescription, ingridients, instruction, serveSize, cookingTime, category, imageUrl);
         databaseReference.child(userId).child(recipeKey).setValue(recipe)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
