@@ -75,7 +75,15 @@ public class exploreRecipe extends Fragment {
 
             categorySpinner.setSelection(categoryAdapter.getPosition("All"));
 
-            // Set up category filter listener
+            searchView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Handle the click event (e.g., open a search activity or perform search)
+                    // For simplicity, you can just focus the SearchView to show the keyboard
+                    searchView.setIconified(false);
+                }
+            });
+
             categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -135,6 +143,19 @@ public class exploreRecipe extends Fragment {
                     // Filter the list based on the search query
                     recipeAdapter.getFilter().filter(newText);
                     return true;
+                }
+            });
+
+            // Add a TextWatcher to monitor changes in the search view's text
+            searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (!hasFocus) {
+                        // When focus is lost, check if the text is empty and reload data
+                        if (searchView.getQuery().toString().isEmpty()) {
+                            readDataFromFirebase();
+                        }
+                    }
                 }
             });
         }
