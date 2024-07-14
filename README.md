@@ -2,9 +2,9 @@
 
 ![Recipe Hub Logo](https://github.com/hack-09/Recipe-Hub/assets/121863049/8c3b867c-9f25-4c05-bc43-5693806bb19a)
 
-
 Welcome to Recipe Hub, where food enthusiasts come together to share and explore delicious recipes. Whether you're a seasoned chef or a home cook, this app is your go-to platform for discovering and sharing your favorite culinary creations.
 
+You can download app from [here ⬇️](https://github.com/hack-09/Recipe-Hub/raw/main/app-release.apk)
 ## Table of Contents
 
 - [Features](#features)
